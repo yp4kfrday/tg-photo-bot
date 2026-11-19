@@ -104,9 +104,9 @@ tg-photo-bot/
    ```bash
    cp .env.example .env
    ```
-   Укажите ваш токен в файле `.env`:
+   Откройте `.env` и вставьте ваш токен:
    ```env
-   BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrsTUVwxyz
+   BOT_TOKEN=your_bot_token_here
    ```
 
 3. **Запустите тесты:**
