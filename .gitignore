@@ -1,0 +1,33 @@
+# Secrets and environment variables
+.env
+*.env
+!.env.example
+
+# Binaries and build artifacts
+tg-photo-bot
+tg-photo-bot.exe
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Output and test artifacts
+*.zip
+*.pdf
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE directories
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

@@ -1,0 +1,41 @@
+[Unit]
+Description=Telegram Photo Batch Bot
+Documentation=https://github.com/your-org/tg-photo-bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# --- Identity ---
+# Create the user once:  sudo useradd --system --no-create-home --shell /usr/sbin/nologin tgbot
+User=tgbot
+Group=tgbot
+WorkingDirectory=/opt/tg-photo-bot
+
+# --- Process ---
+ExecStart=/opt/tg-photo-bot/tg-photo-bot
+Restart=on-failure
+RestartSec=5s
+StartLimitBurst=5
+StartLimitIntervalSec=30s
+
+# --- Graceful shutdown ---
+# Give the bot time to finish downloading in-flight files before SIGKILL.
+TimeoutStopSec=120s
+KillSignal=SIGTERM
+KillMode=mixed
+
+# --- Logging (structured JSON → journald) ---
+# View with: sudo journalctl -u tg-photo-bot -f
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tg-photo-bot
+
+# --- Security hardening ---
+NoNewPrivileges=true
+PrivateTmp=true           # isolated /tmp — prevents cross-process temp file access
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/tmp        # bot writes temp dirs here via os.MkdirTemp
+
+[Install]
+WantedBy=multi-user.target
